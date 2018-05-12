@@ -2,6 +2,15 @@
   Helper methods
 */
 
+export const inputCreator = (type, value, name, placeholder) => {
+	const input = document.createElement('input')
+	input.type = type
+	input.value = value
+	input.name = name
+	input.placeholder = placeholder
+	return input
+}
+
 export const isEmptyObject = (o) => (Object.keys(o).length === 0 && o.constructor === Object) === true
 
 export const sanitize = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')
@@ -47,13 +56,6 @@ export const updateInstruction = (i) => {
 	document.getElementById('instructions').innerHTML = i
 }
 
-export const createInput = (type, value, name, placeholder) => {
-	const input = document.createElement('input')
-	input.type = type
-	input.value = value
-	input.name = name
-	input.placeholder = placeholder
-	return input
-}
+
 
 export const pageReload = () => window.location.reload()
