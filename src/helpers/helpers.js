@@ -1,7 +1,13 @@
-/*
-  Helper methods
-*/
+/**
+ * Helpers method used around the project
+ */
 
+/**
+ * @param  {string} type - type of the input
+ * @param  {string} value - value of the input
+ * @param  {string} name - name givent to the input
+ * @param  {string} placeholder - placeholder
+ */
 export const inputCreator = (type, value, name, placeholder) => {
 	const input = document.createElement('input')
 	input.type = type
@@ -11,29 +17,44 @@ export const inputCreator = (type, value, name, placeholder) => {
 	return input
 }
 
-export const isEmptyObject = (o) => (Object.keys(o).length === 0 && o.constructor === Object) === true
+/**
+ * 
+ * @param {string} s - string to sanitize 
+ */
+export const sanitizeField = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')
 
-export const sanitize = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')
+/**
+ * 
+ * @param {string} e - string that need to be verified 
+ */
+export const isValidMail = (e) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(e)
 
-export const isValidName = (n) => (n.length >= 4 && n.length < 20) === true
-
-export const isValidEmail = (e) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(e)
-
+/**
+ * 
+ * @param {string} p - string that need to be verified 
+ */
 export const isValidPhone = (p) => /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(p)
 
+/**
+ * Check if email is in the members "db"
+ * @param {string} email 
+ * @param {object} members 
+ */
 export const isMember = (email, members) => members.find((m) => m.mail === email)
 
-export const isPrivilegedAccount = (session) => (session === 'admin@sb.com' || session === 'staff@sb.com') === true
-
-export const hasBike = (session) => session.hasOwnProperty('bike') === true
-
+/**
+ * Check if email is in the members "db" and  banned
+ * @param {string} email 
+ * @param {object} members 
+ */
 export const isBanned = (email, members) => {
-  const member = members.find((m) => m.mail === email)
-  return member.banned === true
+	const member = members.find((m) => m.mail === email)
+	return member.isBanned === true
 }
-
-/*
-  Data manipulation methods
+  
+/**
+*  Mostly data manipulation
+*  local or session storage
 */
 
 export const getItem = (i) => window.localStorage.getItem(i) || false
@@ -48,14 +69,49 @@ export const setSession = (s, v) => window.sessionStorage.setItem(s, v)
 
 export const delSession = (s) => window.sessionStorage.removeItem(s)
 
-/*
-  UI manipulation methods
+/**
+* Create temporary session and reload page
+* @param {string} member 
 */
-
-export const updateInstruction = (i) => {
-	document.getElementById('instructions').innerHTML = i
+export const startSession = member => {
+	setSession('session', JSON.stringify(member))
+	window.location.reload()
 }
 
+export const reload = () => window.location.reload()
+
+export const hasBike = (session) => session.hasOwnProperty('bike') === true
 
 
-export const pageReload = () => window.location.reload()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const isEmptyObject = (o) => (Object.keys(o).length === 0 && o.constructor === Object) === true
+
+
+export const isPrivilegedAccount = (session) => (session === 'samya@mail.com' || session === 'kdog@mail.com') === true
+
+

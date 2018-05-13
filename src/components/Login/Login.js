@@ -1,13 +1,71 @@
-import './Login.css'
-import { createInput } from './../../helpers/helpers.js'
+import { 
+	inputCreator,
+	getItem,
+	sanitizeField,
+	isValidMail,
+	isValidPhone,
+	isMember,
+	isBanned,
+	startSession,
+	setItem
+ } from './../../helpers/helpers.js'
 
-const register = () => {
-	console.log('I want to register.')
+ import './Login.css'
+
+const register = e => {
+	// Prevent form submission's default behavior
+	e.preventDefault()
+
+	// Load members from localStorage
+	const members = JSON.parse(getItem('members'))
+  
+	// Sanitize fields
+	const form = document.forms['registerForm']
+	const member = {
+	  'firstName': sanitizeField(form['rFirstName'].value),
+	  'lastName': sanitizeField(form['rLastName'].value),
+	  'phone': sanitizeField(form['rPhone'].value),
+	  'mail': sanitizeField(form['rMail'].value)
+	}
+  
+	// Build error message or return empty string
+	let errors = ''
+	errors += !isValidPhone(member.phone) ? 'Enter a valid phone number.' : ''
+	errors += !isValidMail(member.mail) ? 'Enter a valid email address.'
+	  : isMember(member.mail, members) ? 'You are already registered, please login.'
+		: ''
+  
+	// Push errors or register
+	errors ? alert(errors) : addNewMember(member, members)
 }
 
-const login = () => {
+const login = e => {
+	// Prevent form submission's default behavior
+	e.preventDefault()
+	
+	let errors = ''
+	const members = JSON.parse(getItem('members'))
+	const form = document.forms['loginForm']
+	const currUser = {
+	  'mail': sanitizeField(form['lmail'].value)
+	}
 
+	// Build error message or return empty string
+	errors += !isValidMail(currUser.mail) ? 'Enter a valid email address.'
+	  : !isMember(currUser.mail, members) ? 'You are not registered yet.'
+		: isBanned(currUser.mail, members) ? 'You are banned.'
+		  : ''
+
+	// Push errors or login
+	errors ? alert(errors) : startSession(isMember(currUser.mail, members))
 }
+
+const addNewMember = (member, members) => {
+	members.push(member)
+	setItem('members', JSON.stringify(members))
+	startSession(member)
+}
+  
 
 export const Login = () => {
 	const wrapper = document.createElement('div')
@@ -19,38 +77,33 @@ export const Login = () => {
 	wrapper.appendChild(welcomeMessage)
 
 	// If the user wants to register
-	const registerForm = document.createElement('form')
+	const rForm = document.createElement('form')
 
 	//create basic inputs (first and last name, email, phone and the submit button)
-	registerForm.name = 'registerForm'
-	registerForm.appendChild(inputCreator('text', '', 'firstName', 'John'))
-	registerForm.appendChild(inputCreator('text', '', 'lastName', 'Doe'))
-	registerForm.appendChild(inputCreator('text', '', 'mail', 'john.doe@mail.com'))
-	registerForm.appendChild(inputCreator('text', '', 'phone', '5147124991'))
+	rForm.name = 'registerForm'
+	rForm.appendChild(inputCreator('text', '', 'rFirstName', 'John'))
+	rForm.appendChild(inputCreator('text', '', 'rLastName', 'Doe'))
+	rForm.appendChild(inputCreator('text', '', 'rMail', 'john.doe@mail.com'))
+	rForm.appendChild(inputCreator('text', '', 'rPhone', '5147124991'))
 	
-	const registerButton = inputCreator('submit', 'Register', 'submit', '')
-	registerButton.addEventListener('click', register, false)
-	registerForm.appendChild(register)
-	wrapper.appendChild(registerForm)
+	const rButton = inputCreator('submit', 'Register', 'submit', '')
+	rButton.addEventListener('click', register, false)
+	rForm.appendChild(rButton)
+	wrapper.appendChild(rForm)
 
 	const separator = document.createElement('hr')
 	wrapper.appendChild(separator)
 
 	// If the user wants to log in 
-	const loginForm = document.createElement('form')
+	const lForm = document.createElement('form')
 
 	//create mail input and the submit button
-	loginForm.name = 'loginForm'
-	loginForm.appendChild(inputCreator('text', '', 'mail', 'john.doe@mail.com'))
-	const loginButton = inputCreator('submit', 'Login', 'submit', '')
-	loginButton.addEventListener('click', login, false)
-	loginForm.appendChild(login)
-	wrapper.appendChild(loginForm)
-
-	// If the user wants to log out - just create logout button
-	const logoutButton = inputCreator('submit', 'Logout', 'submit', '')
-	logoutButton.addEventListener('click', logout, false)
-	wrapper.appendChild(logoutButton)
+	lForm.name = 'loginForm'
+	lForm.appendChild(inputCreator('text', '', 'lmail', 'john.doe@mail.com'))
+	const lButton = inputCreator('submit', 'Login', 'submit', '')
+	lButton.addEventListener('click', login, false)
+	lForm.appendChild(lButton)
+	wrapper.appendChild(lForm)
 
 	return wrapper
 }

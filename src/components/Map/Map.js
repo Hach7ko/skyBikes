@@ -1,3 +1,5 @@
+import { rentBike } from './../Bikes/Bikes.js'
+
 window.initMap = () => {
 	//Ubisoft DeGaspé position
 	const ubisoft = { lat: 45.527641, lng: -73.596386 }
@@ -35,7 +37,7 @@ window.initMap = () => {
 			position: marker.position,
 			map
 		}).addListener('click', () => {
-			console.log('rent the bike?')
+			rentBike() 
 		})
 	})
 }

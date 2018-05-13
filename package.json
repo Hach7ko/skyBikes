@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm-run-all --parallel dev:server",
+    "start": "webpack-dev-server --hot",
     "dev:server": "webpack-dev-server --hot --inline",
     "watch": "webpack -w -d",
     "lint": "node_modules/.bin/esw webpack.config.* src --color",
