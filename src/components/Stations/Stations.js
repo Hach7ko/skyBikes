@@ -94,6 +94,7 @@ export const Stations = () => {
 			if (remainingTime === 0) {
 				banMember(i, session)
 			} else {
+				document.getElementById('countdown').innerHTML = `You have ${remainingTime/2} hours left.`
 				remainingTime--
 			}
 		}, 10)

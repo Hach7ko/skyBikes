@@ -35,7 +35,9 @@ window.initMap = () => {
 	markersPosition.forEach(marker => {
 		new google.maps.Marker({
 			position: marker.position,
-			map
+			map,
+			title: marker.name,
+			label: '7'
 		}).addListener('click', () => {
 			rentBike() 
 		})
