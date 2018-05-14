@@ -120,11 +120,11 @@ import {
 	setItem,
 	updateMessage
 } from './../../helpers/helpers.js'
-import widgetSD from './Login.html'
+import widgetSD from './Register.html'
 
-import './Login.css'
+import './Register.css'
 
-export class Login extends HTMLElement {
+export class Register extends HTMLElement {
 	constructor() {
 		super()
 
@@ -134,45 +134,57 @@ export class Login extends HTMLElement {
 	}
 
 	connectedCallback() {
-		updateMessage('Bienvenue! Here you can log in to start biking.')
+		updateMessage('Bienvenue! Here you can register to start biking.')
 
-		// If the user wants to log in 
-		const lForm = document.createElement('form')
+		// If the user wants to register
+		const rForm = document.createElement('form')
 
-		//create mail input and the submit button
-		lForm.name = 'loginForm'
-		lForm.appendChild(inputCreator('text', '', 'lmail', 'john.doe@mail.com'))
-		const lButton = inputCreator('submit', 'Login', 'submit', '')
-		lButton.addEventListener('click', this.login, false)
-		lForm.appendChild(lButton)
-		this.appendChild(lForm)
+		//create basic inputs (first and last name, email, phone and the submit button)
+		rForm.name = 'registerForm'
+		rForm.appendChild(inputCreator('text', '', 'rFirstName', 'John'))
+		rForm.appendChild(inputCreator('text', '', 'rLastName', 'Doe'))
+		rForm.appendChild(inputCreator('text', '', 'rMail', 'john.doe@mail.com'))
+		rForm.appendChild(inputCreator('text', '', 'rPhone', '5147124991'))
+
+		const rButton = inputCreator('submit', 'Register', 'submit', '')
+		rButton.addEventListener('click', this.register, false)
+		rForm.appendChild(rButton)
+		this.appendChild(rForm)
 	}
 
-	login (e) {
+	register(e) {
 		// Prevent form submission's default behavior
 		e.preventDefault()
 
-		let errors = ''
+		// Load members from localStorage
 		const members = JSON.parse(getItem('members'))
-		const form = document.forms['loginForm']
-		const currUser = {
-			'mail': sanitizeField(form['lmail'].value)
+
+		// Sanitize fields
+		const form = document.forms['registerForm']
+		const member = {
+			'firstName': sanitizeField(form['rFirstName'].value),
+			'lastName': sanitizeField(form['rLastName'].value),
+			'phone': sanitizeField(form['rPhone'].value),
+			'mail': sanitizeField(form['rMail'].value)
 		}
 
 		// Build error message or return empty string
-		errors += !isValidMail(currUser.mail) ? 'Enter a valid email address.'
-			: !isMember(currUser.mail, members) ? 'You are not registered yet.'
-				: isBanned(currUser.mail, members) ? 'You are banned.'
-					: ''
+		let errors = ''
+		errors += !isValidPhone(member.phone) ? 'Enter a valid phone number.' : ''
+		errors += !isValidMail(member.mail) ? 'Enter a valid email address.'
+			: isMember(member.mail, members) ? 'You are already registered, please login.'
+				: ''
 
-		// Push errors or login
+				
+		// Push errors or register
 		if (errors) {
 			alert(errors)
 		} else {
-			startSession(isMember(currUser.mail, members))
-
+			members.push(member)
+			setItem('members', JSON.stringify(members))
+			startSession(member)
 		}
 	}
 }
 
-window.customElements.define('login-form', Login)
+window.customElements.define('register-form', Register)

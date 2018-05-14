@@ -1,33 +1,26 @@
-export const startCountdown = () => {
-	let timeLeft = '08:00'
-	document.getElementById('timer').innerHTML = timeLeft
+import {
+	inputCreator
+} from './../../helpers/helpers.js'
+import widgetSD from './Countdown.html'
 
-	let timeArray = timeLeft.split(/[:]+/)
-	let m = timeArray[0]
-	let s = checkSecond((timeArray[1] - 1))
-	if (s === 59) m = m - 1
-	if (m < 0) alert('You are banned!')
-	
-	document.getElementById('timer').innerHTML = `${m}:${s}`
-	setTimeout(startCountdown, 1000)
+import './Countdown.css'
+
+export class Countdown extends HTMLElement {
+	constructor() {
+		super()
+
+		const shadow = this.attachShadow({ mode: 'open' })
+
+		shadow.innerHTML = widgetSD
+	}
+
+	connectedCallback() {
+		const countdownMessage = document.createElement('p')
+		countdownMessage.id = 'countdownMessage'
+		countdownMessage.innerHTML = ''
+		this.appendChild(countdownMessage)
+	}
+
 }
 
-const checkSecond = (sec) => {
-	if (sec < 10 && sec >= 0) sec = '0' + sec // add zero in front of numbers < 10
-	if (sec < 0) sec = '59'
-	return sec
-  }
-
-export const Countdown = () => {
-	const wrapper = document.createElement('div')
-
-	const timeLeft = document.createElement('p')
-	timeLeft.innerHTML = 'Time Left : '
-	wrapper.appendChild(timeLeft)
-
-	const timer = document.createElement('span')
-	timer.id = 'timer'
-	wrapper.appendChild(timer)
-
-	return wrapper
-}
+window.customElements.define('timer-countdown', Countdown)

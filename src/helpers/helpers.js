@@ -51,7 +51,7 @@ export const isBanned = (email, members) => {
 	const member = members.find((m) => m.mail === email)
 	return member.isBanned === true
 }
-  
+
 /**
 *  Mostly data manipulation
 *  local or session storage
@@ -83,35 +83,9 @@ export const reload = () => window.location.reload()
 export const hasBike = (session) => session.hasOwnProperty('bike') === true
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const isEmptyObject = (o) => (Object.keys(o).length === 0 && o.constructor === Object) === true
 
 
 export const isPrivilegedAccount = (session) => (session === 'samya@mail.com' || session === 'kdog@mail.com') === true
 
-
+export const updateMessage = (newMessage) => document.querySelector('#generalMessage').innerHTML = newMessage

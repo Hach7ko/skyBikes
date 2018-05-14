@@ -1,3 +1,5 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 module.exports = {
 	mode: 'development',
 	entry: './src/index.js',
@@ -22,7 +24,15 @@ module.exports = {
 			{	
 				test: /\.png$/, 
 				loader: 'file-loader' 
+			},
+			{
+			  test: /\.html$/,
+			  use: 'html-loader'
 			}
+	  
 		]
-	}
+	},
+	plugins: [
+		new CopyWebpackPlugin([ {from: './index.html', to: ''}])
+	]
 };
