@@ -20,13 +20,14 @@
     background-position: center;
   }
   
-  /* .bike {
-    background-image: url('./../../../public/svg/bike.svg');
+  .bike {
+    background-image: url('./../../../public/icons/bicycle.png');
   }
   
-  .parking {
-    background-image: url('./../../../public/svg/parking.svg');
-  } */
+  .docks {
+    background-image: url('./../../../public/icons/docks.png');
+    color: black;
+  } 
   
   
   @media only screen and (max-width: 640px) {

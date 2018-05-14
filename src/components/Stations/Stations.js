@@ -138,7 +138,7 @@ export const Stations = () => {
 
 			// Udpate UI of the slot (becomes parking slot)
 			e.preventDefault()
-			e.target.className = 'slot parking'
+			e.target.className = 'slot docks'
 			e.target.style.backgroundColor = '#f0f0f0'
 			e.target.dataset.bike = ''
 			e.target.dataset.station = stationNo

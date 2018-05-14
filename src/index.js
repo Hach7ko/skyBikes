@@ -11,6 +11,8 @@ import { getItem, setItem, getSession } from './helpers/helpers.js'
 import { initSavedMembers } from './../public/members.js'
 import { initStations } from './../public/stations.js'
 
+import './index.css'
+
 /*
   Initiliaze an new array of Members
   or fetch existing data from localstorage
