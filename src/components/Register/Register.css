@@ -1,0 +1,16 @@
+#register {
+    position:relative; 
+  left: 25%;
+}
+
+#register input[type='text'] {
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+#register input[type='submit'] {
+    height: 40px;
+    width: 50%;
+}

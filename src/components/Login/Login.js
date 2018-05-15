@@ -113,11 +113,9 @@ import {
 	getItem,
 	sanitizeField,
 	isValidMail,
-	isValidPhone,
 	isMember,
 	isBanned,
 	startSession,
-	setItem,
 	updateMessage
 } from './../../helpers/helpers.js'
 import widgetSD from './Login.html'
@@ -143,6 +141,7 @@ export class Login extends HTMLElement {
 		lForm.name = 'loginForm'
 		lForm.appendChild(inputCreator('text', '', 'lmail', 'john.doe@mail.com'))
 		const lButton = inputCreator('submit', 'Login', 'submit', '')
+		lButton.id = 'lButton'
 		lButton.addEventListener('click', this.login, false)
 		lForm.appendChild(lButton)
 		this.appendChild(lForm)

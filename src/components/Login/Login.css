@@ -1,55 +1,29 @@
 #login {
+  position: absolute;
+  top: 4%;
+  right: 10%;
 }
 
-input, button {
-  display: block;
-  height: 30px;
-  margin-bottom: 2em;
-  min-width: 50%;
-  font-size: 100%;
-  font-family: 'Roboto', sans-serif;
+input {
+  margin: 5px;
 }
 
-input::placeholder {
-  font-style: italic;
+#login input[type='submit'] { 
+  height: 40px;
 }
 
-input[type='text'] {
+#login input[type='text'] {
   border-left: 0;
   border-right: 0;
   border-top: 0;
   border-bottom: 1px solid #dcdcdc;
 }
 
-input[type='submit'], button {
-  min-width: 25%;
-  background-color: #4336f4;
-  height: 40px;
-  line-height: 40px;
-  border: none;
-  color: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-  -webkit-transition: background-color .3s;
-  -moz-transition: background-color .3s;
-  -o-transition: background-color .3s;
-  transition: background-color .3s;
+#lButton:hover, #lButton:focus {
+  color: #4336f4;
+  background-color: #f0f0f0;
 }
 
-input[type='submit']:hover, input[type='submit']:focus {
-  background-color: #4336f4;
-}
-
-@media only screen and (max-width: 640px) {
-  input, input[type='submit'], button {
-    min-width: 100%;
-  }
-}
-
-hr {
-  border: 0;
-  height: 0;
-  border-top: none;
-  border-bottom: 1px dotted #dcdcdc;
-  margin: 4em 0;
+#login form {
+  display: -webkit-inline-box;
 }

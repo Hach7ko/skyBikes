@@ -48,6 +48,7 @@ const message = new Message()
 
 
 document.querySelector('#message').appendChild(message)
+document.getElementById('map').appendChild(Map())
 if (getSession('session')) {
   document.querySelector('#logout').appendChild(logoutButton)
   document.querySelector('#stations').appendChild(bikeStations)

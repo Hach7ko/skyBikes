@@ -1,4 +1,4 @@
-button {
+/* button {
 margin: 2em 0 0 0;
 }
 
@@ -77,4 +77,18 @@ margin: 2em 0 0 0;
 .column-title {
   text-align: center;
   font-weight: 700;
+} */
+
+.card__sys-admin-container {
+  text-align: center;
+  display: inline-block;
+  border-radius: 5px;
+  border: 1px solid grey;
+  font-family: Helvetica;
+  margin: 3px;
+  width: 30%;
+}
+
+.card__sys-admin-container:hover {
+  box-shadow: 3px 3px 3px;
 }

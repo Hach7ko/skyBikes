@@ -1,0 +1,19 @@
+#logout {
+    position: absolute;
+    top: 4%;
+    right: 10%;
+}
+
+input {
+    margin: 5px;
+}
+
+#logout input[type='submit'] { 
+    height: 40px;
+    width: 100px;
+}
+
+#logout input[type='submit']:hover, #logout input[type='submit']:focus {
+    color: #4336f4;
+    background-color: #f0f0f0;
+}

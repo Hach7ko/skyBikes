@@ -89,3 +89,15 @@ export const isEmptyObject = (o) => (Object.keys(o).length === 0 && o.constructo
 export const isPrivilegedAccount = (session) => (session === 'samya@mail.com' || session === 'kdog@mail.com') === true
 
 export const updateMessage = (newMessage) => document.querySelector('#generalMessage').innerHTML = newMessage
+
+export const showStation = (id, name) => {
+	for (let i = 1; i < 4; i++) {
+		if (i === id) {
+			document.querySelector(`#station-${i}`).style.display = 'block'
+			document.querySelector(`#label-${i}`).innerHTML = `Bike Station - ${name}`
+		} 
+		else {
+			document.querySelector(`#station-${i}`).style.display = 'none'			
+		} 
+	} 
+}

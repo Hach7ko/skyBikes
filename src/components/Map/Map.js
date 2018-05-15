@@ -9,6 +9,7 @@ window.initMap = () => {
 	const markersPosition = [
 		{
 			name: 'de Gaspé / Saint-Viateur',
+			id: 1,
 			position: {
 				lat: 45.5277132,
 				lng: -73.5975606
@@ -16,6 +17,7 @@ window.initMap = () => {
 		},
 		{
 			name: 'Maguire / Henri-Julien',
+			id: 2,
 			position: {
 				lat: 45.5271944,
 				lng: -73.5934383
@@ -23,6 +25,7 @@ window.initMap = () => {
 		},
 		{
 			name: 'Saint-Dominique / Saint-Viateur',
+			id: 3,
 			position: {
 				lat: 45.5266255,
 				lng: -73.598367
@@ -37,10 +40,13 @@ window.initMap = () => {
 			title: marker.name,
 			label: '7'
 		}).addListener('click', () => {
-			//rentBike() 
+			showStation(marker.id, marker.name)
 		})
 	})
 }
+
+
+import { showStation } from './../../helpers/helpers.js'
 
 export const Map = () => {
 	const p = document.createElement('p')
