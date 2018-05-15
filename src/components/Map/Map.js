@@ -33,20 +33,22 @@ window.initMap = () => {
 		}
 	]
 
+	const markers = []
+
 	markersPosition.forEach(marker => {
-		new google.maps.Marker({
+		const m = new google.maps.Marker({
 			position: marker.position,
 			map,
 			title: marker.name,
-			label: '7'
+			label: ''
 		}).addListener('click', () => {
 			showStation(marker.id, marker.name)
 		})
 	})
 }
 
-
-import { showStation } from './../../helpers/helpers.js'
+const CJSON = require('circular-json');
+import { showStation, setItem, updateLabel } from './../../helpers/helpers.js'
 
 export const Map = () => {
 	const p = document.createElement('p')

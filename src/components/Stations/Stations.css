@@ -1,32 +1,32 @@
 .station {
-    width: 100%;
-    margin-bottom: 2em;
-  }
-  
-  .station p {
-    margin-bottom: 1em;
-  }
-  
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.station p {
+  margin-bottom: 1em;
+}
+
+.slot {
+  display: inline-block;
+  width: 10%;
+  padding: 2em 1em;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bike {
+  background-image: url('./../../../public/icons/bicycle.png');
+}
+
+.docks {
+  background-image: url('./../../../public/icons/docks.png');
+  color: black;
+} 
+
+
+@media only screen and (max-width: 640px) {
   .slot {
-    display: inline-block;
-    width: 10%;
-    padding: 2em 1em;
-    background-repeat: no-repeat;
-    background-position: center;
+    width: 20%;
   }
-  
-  .bike {
-    background-image: url('./../../../public/icons/bicycle.png');
-  }
-  
-  .docks {
-    background-image: url('./../../../public/icons/docks.png');
-    color: black;
-  } 
-  
-  
-  @media only screen and (max-width: 640px) {
-    .slot {
-      width: 20%;
-    }
 }

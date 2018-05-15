@@ -82,9 +82,7 @@ export const reload = () => window.location.reload()
 
 export const hasBike = (session) => session.hasOwnProperty('bike') === true
 
-
 export const isEmptyObject = (o) => (Object.keys(o).length === 0 && o.constructor === Object) === true
-
 
 export const isPrivilegedAccount = (session) => (session === 'samya@mail.com' || session === 'kdog@mail.com') === true
 
@@ -100,4 +98,51 @@ export const showStation = (id, name) => {
 			document.querySelector(`#station-${i}`).style.display = 'none'			
 		} 
 	} 
+}
+
+const CJSON = require('circular-json');
+export const updateNumberOfBike = (stationId, stationName, type) => {
+	let markers = CJSON.parse(getItem('markers'))
+
+	markers.forEach(marker => {
+		
+		if(marker.title === stationName) {
+			if(type === 'rent') {
+				marker.f.label= "JE LOUE"
+			} else if(type === 'return') {
+				marker.f.label+=1
+			}
+		}
+
+		console.log(marker.f.label)
+	})	
+
+	setItem('markers', CJSON.stringify(markers))
+}
+
+export const updateLabel = (marker) => {
+	let stations = JSON.parse(getItem('stations'))
+	let numberOfBike = 0
+
+	stations.map(station => {
+		station.map(s => {			
+			if(!isEmptyObject(s)) numberOfBike++
+		})
+		updateMarker(numberOfBike, marker)
+	})
+}
+
+export const updateMarker = (numberOfBike, m) => {
+	//let markers = CJSON.parse(getItem('markers'))
+
+	// markers.forEach(marker => {
+	// 	marker.f.label = numberOfBike
+	// 	console.log(marker.f.label)
+	// })
+
+	// google.maps.getMap().then(map => {
+	// 	console.log(map)
+	// })
+
+	//setItem('markers', CJSON.stringify(markers))
 }

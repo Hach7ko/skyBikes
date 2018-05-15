@@ -7,7 +7,8 @@ import {
 	reload,
 	setItem,
 	delSession,
-	updateMessage
+	updateMessage,
+	updateNumberOfBike
 } from './../../helpers/helpers.js'
 import widgetSD from './Stations.html'
 
@@ -27,8 +28,8 @@ export class Stations extends HTMLElement {
 	}
 
 	connectedCallback() {
-		const divBikeStationView = document.createElement('div')
-		divBikeStationView.setAttribute('class', 'stations')
+		const bikeStation = document.createElement('div')
+		bikeStation.setAttribute('class', 'stations')
 
 		const divStationView = document.createElement('div')
 		const divStationTitle = document.createElement('h2')
@@ -47,7 +48,7 @@ export class Stations extends HTMLElement {
 			station.id = `station-${i+1}`
 
 			const label = document.createElement('h3')
-			label.innerHTML = `Bike Station - de Gaspé / Saint-Viateur`
+			label.innerHTML = `de Gaspé / Saint-Viateur`
 			label.id = `label-${i+1}`
 			station.appendChild(label)
 
@@ -55,7 +56,7 @@ export class Stations extends HTMLElement {
 				// Single bike element
 				const bike = document.createElement('a')
 				bike.href = '#'
-				bike.className = f.id ? 'bike slot' : 'parking slot'
+				bike.className = f.id ? 'bike slot' : 'docks slot'
 				bike.dataset.bike = f.id || ''
 				bike.dataset.station = i
 				bike.dataset.slot = j
@@ -72,9 +73,9 @@ export class Stations extends HTMLElement {
 			}
 		})
 
-		divBikeStationView.appendChild(divStationView)
+		bikeStation.appendChild(divStationView)
 
-		this.appendChild(divBikeStationView)
+		this.appendChild(bikeStation)
 	}
 
 	/**
@@ -125,14 +126,17 @@ export class Stations extends HTMLElement {
 	rentBike(e) {
 		e.preventDefault()
 		if (!hasBike(this.session)) {
+
 			// Get data attributes from target
 			const bikeId = e.target.dataset.bike
 			const bikeColor = e.target.dataset.color
 			const stationNo = e.target.dataset.station
 			const slotNo = e.target.dataset.slot
+			const stationName = e.target.dataset.name
+
+			updateNumberOfBike(stationNo, stationName, 'rent')
 
 			// Udpate UI of the slot (becomes parking slot)
-			e.preventDefault()
 			e.target.className = 'slot docks'
 			e.target.style.backgroundColor = '#f0f0f0'
 			e.target.dataset.bike = ''
