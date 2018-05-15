@@ -10,7 +10,7 @@ header, footer {
 	background: #f0f0f0;
 	padding: 1em;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-	background-color: #4336f4;
+	background-color: #87CEEB;
 	color: #fff;
 	font-size: 1rem;
 }
@@ -41,10 +41,10 @@ input::placeholder {
 }
 
 input[type='submit'], button {
-	background-color: #4336f4;
+	background-color: #87CEEB;
 	height: 40px;
 	border: none;
-	color: #f0f0f0;
+	color: #fff;
 	border-radius: 2px;
 	cursor: pointer;
 	-webkit-transition: background-color .3s;

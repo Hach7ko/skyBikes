@@ -20,8 +20,8 @@ input {
 }
 
 #lButton:hover, #lButton:focus {
-  color: #4336f4;
-  background-color: #f0f0f0;
+  color: #87CEEB;
+  background-color: #fff;
 }
 
 #login form {
