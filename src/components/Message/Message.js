@@ -1,7 +1,5 @@
 import widgetSD from './Message.html'
 
-import './Message.css'
-
 export class Message extends HTMLElement {
 	constructor() {
 		super()

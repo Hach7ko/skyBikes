@@ -3,18 +3,17 @@ module.exports = {
 	  browser
 		.url('http://localhost:8080')
 		.waitForElementVisible('body', 1000)
-		.assert.title('localhost', 'The <title> is correct')
+		.assert.title('Sky Bikes', 'The <title> is correct')
 		.end()
 	},
 	'Login user for sysadmin' : function (browser) {
-	  browser
+	  	browser
 		.url('http://localhost:8080')
-		.waitForElementVisible('#login')
-	  // .waitForElementVisible('input[name=lmail]')
-	  // .setValue('input[name=lmail]', 'kdog@mail.com')
-	  // .click('input[name=submit]')
-	  // .waitForElementVisible('#sysAdmin')
-	  .end()
+		.waitForElementVisible('input[name=lmail]')
+		.setValue('input[name=lmail]', 'kdog@mail.com')
+		.click('input[name=submit]')
+		.waitForElementVisible('#sysAdmin')
+		.end()
 	},
 	'Login user for citizen worker' : function (browser) {
 	  browser

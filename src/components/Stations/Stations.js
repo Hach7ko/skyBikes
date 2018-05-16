@@ -7,8 +7,7 @@ import {
 	reload,
 	setItem,
 	delSession,
-	updateMessage,
-	updateNumberOfBike
+	updateMessage
 } from './../../helpers/helpers.js'
 import widgetSD from './Stations.html'
 
@@ -66,7 +65,10 @@ export class Stations extends HTMLElement {
 				station.appendChild(bike)
 			})
 
-			if(i===0) divStationView.appendChild(station)
+			//for the initialisation just display the first station
+			if (i===0) {
+				divStationView.appendChild(station)	
+			} 
 			else {
 				station.style.display = 'none'
 				divStationView.appendChild(station)
@@ -95,7 +97,7 @@ export class Stations extends HTMLElement {
 	}
 
 	/**
-	 * 
+	 *  Return the bike to a station
 	 * @param {*} e 
 	 */
 	manualBikeReturn(e) {
@@ -109,34 +111,32 @@ export class Stations extends HTMLElement {
 
 			// Detach bike from member
 			delete this.session.bike
-			this.updateMemberSession(this.session)
+		this.updateMemberSession(this.session)
 
 			setItem('stations', JSON.stringify(this.bikeStations))
 			reload()
 
 		} else {
-			alert('You are not riding a bike.')
+			alert('You\'re not riding a bike.')
 		}
 	}
 
 	/**
-	 * 
+	 * Rent a bike 
 	 * @param {*} e 
 	 */
 	rentBike(e) {
 		e.preventDefault()
 		if (!hasBike(this.session)) {
 
-			// Get data attributes from target
+			// Grab the data
 			const bikeId = e.target.dataset.bike
 			const bikeColor = e.target.dataset.color
 			const stationNo = e.target.dataset.station
 			const slotNo = e.target.dataset.slot
 			const stationName = e.target.dataset.name
 
-			updateNumberOfBike(stationNo, stationName, 'rent')
-
-			// Udpate UI of the slot (becomes parking slot)
+			// Change to a slot
 			e.target.className = 'slot docks'
 			e.target.style.backgroundColor = '#f0f0f0'
 			e.target.dataset.bike = ''
@@ -168,7 +168,7 @@ export class Stations extends HTMLElement {
 	}
 
 	/**
-	 * 
+	 * Remove the bike from the dock
 	 * @param {*} id 
 	 */
 	removeBikeFromStation(id) {
@@ -177,36 +177,27 @@ export class Stations extends HTMLElement {
 	}
 
 	/**
-	 * Updates stations object in localStorage and reload page
+	 * Automatically return the bike
 	 * @param {*} bike 
 	 */
-	automaticBikeReturn(bike) {
+	returnBike(bike) {
 		delete bike.rentTime
 		this.bikeStations.some((station, i) => station.some((b, j) => isEmptyObject(b) ? station[j] = bike : false))
 		setItem('stations', JSON.stringify(this.bikeStations))
 	}
 
 	/**
-	 * Create a `banned` key and set it to true before update the member session
-	 * @param {*} session 
-	 */
-	markAsBanned(session) {
-		session.isBanned = true
-		this.updateMemberSession(session)
-	}
-
-	/**
-	 * 
+	 * Ban the member if he doesnt return the bike
 	 * @param {*} i 
 	 * @param {*} session 
 	 */
 	banMember(i, session) {
 		// Stop countdown, update UI
 		clearInterval(i)
-		alert('Your remaining time is over.')
+		alert('Uh oh! Remaining time is over!')
 
 		// Return the bike
-		this.automaticBikeReturn(session.bike)
+		this.returnBike(session.bike)
 
 		// Detach bike from member
 		delete session.bike
@@ -214,7 +205,8 @@ export class Stations extends HTMLElement {
 
 		// Update member session with `banned` key and "redirect" to login screen
 		if (!isPrivilegedAccount(session.mail)) {
-			this.markAsBanned(session)
+			session.isBanned = true
+			this.updateMemberSession(session)
 			delSession('session')
 			reload()
 
@@ -222,14 +214,15 @@ export class Stations extends HTMLElement {
 	}
 
 	/**
-	 * TODO: Update to object.assign
+	 * Update the current members
 	 * @param {object} session 
 	 */
 	updateMemberSession(session) {
-		let fakeArray = []
-		fakeArray.push(session)
-		const updatedUsers = this.members.map(user => fakeArray.find(o => o.mail === user.mail) || user)
+		//ze have to push in an array
+		let a = []
+		a.push(session)
 
+		const updatedUsers = this.members.map(user => a.find(o => o.mail === user.mail) || user)
 		setItem('members', JSON.stringify(updatedUsers))
 	}
 

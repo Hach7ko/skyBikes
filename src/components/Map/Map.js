@@ -1,3 +1,6 @@
+import { showStation, setItem } from './../../helpers/helpers.js'
+import { markersPosition } from './../../../public/markers.js'
+
 window.initMap = () => {
 	//Ubisoft DeGaspé position
 	const ubisoft = { lat: 45.527641, lng: -73.596386 }
@@ -5,33 +8,6 @@ window.initMap = () => {
 		zoom: 16,
 		center: ubisoft
 	})
-
-	const markersPosition = [
-		{
-			name: 'de Gaspé / Saint-Viateur',
-			id: 1,
-			position: {
-				lat: 45.5277132,
-				lng: -73.5975606
-			}
-		},
-		{
-			name: 'Maguire / Henri-Julien',
-			id: 2,
-			position: {
-				lat: 45.5271944,
-				lng: -73.5934383
-			}
-		},
-		{
-			name: 'Saint-Dominique / Saint-Viateur',
-			id: 3,
-			position: {
-				lat: 45.5266255,
-				lng: -73.598367
-			}
-		}
-	]
 
 	const markers = []
 
@@ -46,9 +22,6 @@ window.initMap = () => {
 		})
 	})
 }
-
-const CJSON = require('circular-json');
-import { showStation, setItem, updateLabel } from './../../helpers/helpers.js'
 
 export const Map = () => {
 	const p = document.createElement('p')

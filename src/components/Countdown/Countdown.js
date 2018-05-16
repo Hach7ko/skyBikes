@@ -3,8 +3,6 @@ import {
 } from './../../helpers/helpers.js'
 import widgetSD from './Countdown.html'
 
-import './Countdown.css'
-
 export class Countdown extends HTMLElement {
 	constructor() {
 		super()

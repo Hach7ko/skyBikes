@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="1"
+            failures="0"
             tests="3">
 
   <testsuite name="login"
-    errors="0" failures="1" hostname="" id="" package="login" skipped="1"
-    tests="3" time="15.99" timestamp="Wed, 16 May 2018 00:00:11 GMT">
+    errors="0" failures="0" hostname="" id="" package="login" skipped="0"
+    tests="3" time="11.97" timestamp="Wed, 16 May 2018 02:21:39 GMT">
   
-    <testcase name="Test title SkyBikes" classname="login" time="4.765" assertions="2">
+    <testcase name="Test title SkyBikes" classname="login" time="4.196" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Login user for sysadmin" classname="login" time="11.22" assertions="1">  <failure message="Timed out while waiting for element &lt;#login&gt; to be present for 5000 milliseconds.">    at Object.Login user for sysadmin (F:\Samya\web-dev\skyBikes\tests\e2e\login.js:12:4)
-    at _combinedTickCallback (internal/process/next_tick.js:131:7)</failure>
+    <testcase name="Login user for sysadmin" classname="login" time="3.848" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Login user for citizen worker" classname="login" time="3.926" assertions="2">
+
+    
 
     
     </testcase>
@@ -23,13 +31,6 @@
 
   
 
-  
-    
-    <testcase
-      name="Login user for citizen worker" classname="login">
-      <skipped />
-    </testcase>
-    
   
   </testsuite>
 </testsuites>
