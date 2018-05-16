@@ -1,11 +1,23 @@
 {
   "name": "skyBikes",
+  "jest": {
+    "testResultsProcessor": "./node_modules/jest-html-reporter",
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    }
+  },
   "version": "1.0.0",
   "description": "Technical Test in vanilla JS",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
     "test": "jest",
+    "test-e2e": "nightwatch",
     "start": "webpack-dev-server --watch",
     "lint": "node_modules/.bin/esw webpack.config.* src --color"
   },
@@ -23,11 +35,14 @@
   },
   "homepage": "https://github.com/Hach7ko/skyBikes#readme",
   "devDependencies": {
+    "@skatejs/bore": "^4.0.3",
     "babel-core": "^6.26.3",
     "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-custom-element-classes": "^0.1.0",
     "babel-preset-es2015": "^6.24.1",
+    "casperjs": "^1.1.4",
+    "chromedriver": "^2.38.3",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
@@ -38,15 +53,20 @@
     "html-webpack-plugin": "^3.2.0",
     "isomorphic-style-loader": "^4.0.0",
     "jest": "^22.4.3",
+    "nightwatch": "^0.9.21",
     "npm-run-all": "^4.0.2",
     "raw-loader": "^0.5.1",
     "regenerator-runtime": "^0.11.1",
+    "selenium-server": "^3.12.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.8.2",
     "webpack-cli": "^2.0.9",
     "webpack-dev-server": "^3.0.0"
   },
   "dependencies": {
-    "circular-json": "^0.5.4"
+    "@skatejs/ssr": "^0.19.3",
+    "@skatejs/val": "^0.4.0",
+    "circular-json": "^0.5.4",
+    "jest-html-reporter": "^2.3.0"
   }
 }
