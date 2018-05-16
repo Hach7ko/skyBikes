@@ -24,6 +24,7 @@ export class Logout extends HTMLElement {
     }
 
     logout () {
+        //delete the current session and relaod
         delSession('session')
         reload()
     }

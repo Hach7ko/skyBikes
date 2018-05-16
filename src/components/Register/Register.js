@@ -24,6 +24,7 @@ export class Register extends HTMLElement {
 	}
 
 	connectedCallback() {
+		//Creqte the welcome message
 		updateMessage('Bienvenue! Here you can register to start biking.')
 
 		// If the user wants to register
@@ -36,6 +37,7 @@ export class Register extends HTMLElement {
 		rForm.appendChild(inputCreator('text', '', 'rMail', 'john.doe@mail.com'))
 		rForm.appendChild(inputCreator('text', '', 'rPhone', '5147124991'))
 
+		// create the submit button
 		const rButton = inputCreator('submit', 'Register', 'submit', '')
 		rButton.addEventListener('click', this.register, false)
 		rForm.appendChild(rButton)
@@ -43,7 +45,7 @@ export class Register extends HTMLElement {
 	}
 
 	register(e) {
-		// Prevent form submission's default behavior
+		// Prevent default behavior (jump glitch)
 		e.preventDefault()
 
 		// Load members from localStorage
@@ -58,7 +60,7 @@ export class Register extends HTMLElement {
 			'mail': sanitizeField(form['rMail'].value)
 		}
 
-		// Build error message or return empty string
+		// Add message errors if  nothing fit requirements
 		let errors = ''
 		errors += !isValidPhone(member.phone) ? 'Enter a valid phone number.' : ''
 		errors += !isValidMail(member.mail) ? 'Enter a valid email address.'

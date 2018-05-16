@@ -13,6 +13,7 @@ export class Countdown extends HTMLElement {
 	}
 
 	connectedCallback() {
+		// Create the countdown html
 		const countdownMessage = document.createElement('p')
 		countdownMessage.id = 'countdownMessage'
 		countdownMessage.innerHTML = ''

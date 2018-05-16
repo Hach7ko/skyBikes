@@ -3,6 +3,7 @@
  */
 
 /**
+ * Create an input
  * @param  {string} type - type of the input
  * @param  {string} value - value of the input
  * @param  {string} name - name givent to the input
@@ -17,6 +18,69 @@ export const inputCreator = (type, value, name, placeholder) => {
 	return input
 }
 
+/**
+ * Update the innerHtml of the main message
+ * @param {string} newMessage 
+ */
+export const updateMessage = (newMessage) => document.querySelector('#generalMessage').innerHTML = newMessage
+
+
+/**
+ * Display the current station selected
+ * @param {number} id of the station
+ * @param {string} name name of the station
+ */
+export const showStation = (id, name) => {
+	//atm we know there is only 3 stqtions
+	for (let i = 1; i < 4; i++) {
+		if (i === id) {
+			document.querySelector(`#station-${i}`).style.display = 'block'
+			document.querySelector(`#label-${i}`).innerHTML = `Bike Station - ${name}`
+		}
+		else {
+			document.querySelector(`#station-${i}`).style.display = 'none'
+		}
+	}
+}
+
+/**
+ * Just double check if the object is empty or not
+ * @param {object} o 
+ */
+export const isEmptyObject = (o) => (Object.keys(o).length === 0 && o.constructor === Object) === true
+
+/**
+*  Mostly data manipulation
+*  local or session storage
+*  Get / SET / DEL and START
+*/
+export const getItem = (i) => window.localStorage.getItem(i) || false
+
+export const setItem = (i, v) => window.localStorage.setItem(i, v)
+
+export const delItem = (i) => window.localStorage.removeItem(i)
+
+export const getSession = (s) => window.sessionStorage.getItem(s)
+
+export const setSession = (s, v) => window.sessionStorage.setItem(s, v)
+
+export const delSession = (s) => window.sessionStorage.removeItem(s)
+
+/**
+* Create temporary session and reload page
+* @param {string} member 
+*/
+export const startSession = member => {
+	setSession('session', JSON.stringify(member))
+	window.location.reload()
+}
+
+export const reload = () => window.location.reload()
+
+
+/**
+ * For form or input verificator
+ */
 /**
  * 
  * @param {string} s - string to sanitize 
@@ -53,49 +117,7 @@ export const isBanned = (email, members) => {
 }
 
 /**
-*  Mostly data manipulation
-*  local or session storage
-*/
-
-export const getItem = (i) => window.localStorage.getItem(i) || false
-
-export const setItem = (i, v) => window.localStorage.setItem(i, v)
-
-export const delItem = (i) => window.localStorage.removeItem(i)
-
-export const getSession = (s) => window.sessionStorage.getItem(s)
-
-export const setSession = (s, v) => window.sessionStorage.setItem(s, v)
-
-export const delSession = (s) => window.sessionStorage.removeItem(s)
-
-/**
-* Create temporary session and reload page
-* @param {string} member 
-*/
-export const startSession = member => {
-	setSession('session', JSON.stringify(member))
-	window.location.reload()
-}
-
-export const reload = () => window.location.reload()
-
+ * Verifiy is the member is already riding a bike
+ * @param {*} session 
+ */
 export const hasBike = (session) => session.hasOwnProperty('bike') === true
-
-export const isEmptyObject = (o) => (Object.keys(o).length === 0 && o.constructor === Object) === true
-
-export const isPrivilegedAccount = (session) => (session === 'samya@mail.com' || session === 'kdog@mail.com') === true
-
-export const updateMessage = (newMessage) => document.querySelector('#generalMessage').innerHTML = newMessage
-
-export const showStation = (id, name) => {
-	for (let i = 1; i < 4; i++) {
-		if (i === id) {
-			document.querySelector(`#station-${i}`).style.display = 'block'
-			document.querySelector(`#label-${i}`).innerHTML = `Bike Station - ${name}`
-		} 
-		else {
-			document.querySelector(`#station-${i}`).style.display = 'none'			
-		} 
-	} 
-}

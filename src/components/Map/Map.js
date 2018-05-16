@@ -16,6 +16,7 @@ window.initMap = () => {
 			position: marker.position,
 			map,
 			title: marker.name,
+			//TODO: dynamic label
 			label: ''
 		}).addListener('click', () => {
 			showStation(marker.id, marker.name)
@@ -24,6 +25,7 @@ window.initMap = () => {
 }
 
 export const Map = () => {
+	//when the page is loading
 	const p = document.createElement('p')
 	p.innerHTML = 'Loading Google Map'
 	return p

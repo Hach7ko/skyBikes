@@ -5,15 +5,39 @@
 _The city wants to put in place a new bicycle rental program for all citizens; the name of the program is Sky Bikes! However before going ahead with signing the contract, the mayor has mandated you to provide a visual prototype that will simulate and explain the program, albeit on a simplified scale, to all stakeholders._
 
 ## Usage
-`npm install`
 
-`npm start` _to run the project_
+```shell
+# Install dependencies
+npm install
 
-`npm test` _to run unit test_
+# Start the development server
+npm start
 
-`npm run test-e2e` _to run e2e test_
+# Run tests manually
+npm run test
 
-## Members
+# Run E2E test
+npm run test-e2e
+```
+
+## Project Structure
+
+./src/components: files for each component (JS, CSS, unit-tests, helpers)
+
+./tests/e2e: everything regarding e2e tests
+
+./public: static data (marker position, members, stations)
+
+## Usage
+Using local and session storage for the data.
+
+After running the application, you can either login or register.
+By doing so, you will next have access to the page for renting bike: you can do that by clicking on a bike and the rentig will automatically start. You'll have "8 hours" (a countdown will be displayed) to return it by clicking on a dock or you will be banned.
+
+There is two special accounts:
+- The sys admin will have the same page as a regular user, plus a list of all users with some information (are they banned, renting a bike, personnal information,...)
+- The city worker will have the same page as a regular user, plus an option to sort all the bikes in the default order.
+
 Here is a list of members already available:
 
 samya@mail.com - *City Worker*
@@ -22,15 +46,13 @@ kdog@mail.com - *Sys Admin*
 
 bam@mail.com - *Ban Member*
 
-## Improvements
+## Possible improvements
 
-EVERYTHING.
-There is a lot of things that I'm sure could havve been done another way, or better!
-
-The main thing I would have love to be able to complete is the complete integration of the Google Maps API. At the moment it's only showing you all the stations, and once you click on it it shows you the bikes available.
-I would have like to be able to add a label in the marker to show how many bikes are left for example.
-
-I'm also disappointed that I was not able to find a way to do unit testing with js-vanilla web-components. I tried several things but none of them where working correctly, probably because of my lack of knowledge in this field.
+Here's the exhaustive list:
+- Handle in a better way the reload technique, by using `attributeChangedCallback`
+- Write better tests and extend their coverage (especially testing webcomponents)
+- Improve the used of Google Maps API (by using the markers like in Bixi) and the init window function
+- Update UI (all the alerts message) could be shown with a push / toast
 
 ## Last but not least
 This was a very good exercice for me, even though it was tricky to be able to spend some time working on this given my agenda!

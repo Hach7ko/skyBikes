@@ -22,23 +22,23 @@ export class Login extends HTMLElement {
 	}
 
 	connectedCallback() {
-		updateMessage('Bienvenue! Here you can log in to start biking.')
-
 		// If the user wants to log in 
 		const lForm = document.createElement('form')
 
 		//create mail input and the submit button
 		lForm.name = 'loginForm'
 		lForm.appendChild(inputCreator('text', '', 'lmail', 'john.doe@mail.com'))
+		
 		const lButton = inputCreator('submit', 'Login', 'submit', '')
 		lButton.id = 'lButton'
 		lButton.addEventListener('click', this.login, false)
 		lForm.appendChild(lButton)
+		
 		this.appendChild(lForm)
 	}
 
 	login (e) {
-		// Prevent form submission's default behavior
+		// Prevent default behavior (glitch jump)
 		e.preventDefault()
 
 		let errors = ''
@@ -48,7 +48,7 @@ export class Login extends HTMLElement {
 			'mail': sanitizeField(form['lmail'].value)
 		}
 
-		// Build error message or return empty string
+		// Add message errors if nothing fit requirements
 		errors += !isValidMail(currUser.mail) ? 'Enter a valid email address.'
 			: !isMember(currUser.mail, members) ? 'You are not registered yet.'
 				: isBanned(currUser.mail, members) ? 'You are banned.'

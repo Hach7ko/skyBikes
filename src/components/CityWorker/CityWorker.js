@@ -14,15 +14,12 @@ export class CityWorker extends HTMLElement {
 	}
 
 	connectedCallback() {
-		// Area title
-		const separator = document.createElement('hr')
-		this.appendChild(separator)
-
+		// Create the city worker zone
 		const title = document.createElement('h2')
 		title.innerHTML = 'City Worker'
 		this.appendChild(title)
 
-		// Sort button
+		// Create the button to sort the bikes
 		const button = document.createElement('button')
 		button.innerHTML = 'Reorder bikes'
 		button.addEventListener('click', this.cleanBikes, false)
@@ -30,12 +27,9 @@ export class CityWorker extends HTMLElement {
 	}
 
 	cleanBikes () {
-		// Simple hard reset so far
+		// "Cleaning" by reseting
 		setItem('stations', JSON.stringify(initStations))
-
-		// Also clean users to avoid conflicts
 		setItem('members', JSON.stringify(initSavedMembers))
-
 		reload()
 	}
 }

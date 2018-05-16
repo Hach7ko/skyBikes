@@ -10,6 +10,7 @@ export class Message extends HTMLElement {
 	}
 
 	connectedCallback() {
+		//create the message that will update given what's shown
 		const generalMessage = document.createElement('p')
 		generalMessage.id = 'generalMessage'
 		generalMessage.innerHTML = ''

@@ -1,6 +1,5 @@
 import {
 	isEmptyObject,
-	isPrivilegedAccount,
 	hasBike,
 	getItem,
 	getSession,
@@ -83,7 +82,7 @@ export class Stations extends HTMLElement {
 	/**
 	 * Ban member if countdown expires, otherwise, juste update the clock in the UI
 	 */
-	initCountdown() {
+	startCountdown() {
 		let remainingTime = 1600
 
 		const i = setInterval(() => {
@@ -128,42 +127,39 @@ export class Stations extends HTMLElement {
 	rentBike(e) {
 		e.preventDefault()
 		if (!hasBike(this.session)) {
-
 			// Grab the data
-			const bikeId = e.target.dataset.bike
-			const bikeColor = e.target.dataset.color
-			const stationNo = e.target.dataset.station
-			const slotNo = e.target.dataset.slot
-			const stationName = e.target.dataset.name
+			const id = e.target.dataset.bike
+			const color = e.target.dataset.color
+			const stationId = e.target.dataset.station
+			const slotNumber = e.target.dataset.slot
 
 			// Change to a slot
 			e.target.className = 'slot docks'
 			e.target.style.backgroundColor = '#f0f0f0'
 			e.target.dataset.bike = ''
-			e.target.dataset.station = stationNo
-			e.target.dataset.slot = slotNo
 			e.target.dataset.color = ''
+			e.target.dataset.station = stationId
+			e.target.dataset.slot = slotNumber
 			e.target.removeEventListener('click', (e) => this.rentBike(e))
 			e.target.addEventListener('click', (e) => this.manualBikeReturn(e), false)
 
-			// Update data
-			// Add bike object to session
+			// Update data and the bike
 			this.session.bike = {
-				'id': bikeId,
-				'color': bikeColor,
+				id,
+				color,
 				'rentTime': new Date().getTime()
 			}
 
 			this.updateMemberSession(this.session)
 
 			// Remove bike from the local storage
-			this.removeBikeFromStation(bikeId)
+			this.removeBikeFromStation(id)
 
 			// Start countdown
-			this.initCountdown()
+			this.startCountdown()
 
 		} else {
-			alert('You are already riding a bike!')
+			alert('You\'re already riding a bike!')
 		}
 	}
 
@@ -181,6 +177,7 @@ export class Stations extends HTMLElement {
 	 * @param {*} bike 
 	 */
 	returnBike(bike) {
+		//cancel the renting time
 		delete bike.rentTime
 		this.bikeStations.some((station, i) => station.some((b, j) => isEmptyObject(b) ? station[j] = bike : false))
 		setItem('stations', JSON.stringify(this.bikeStations))
@@ -192,25 +189,21 @@ export class Stations extends HTMLElement {
 	 * @param {*} session 
 	 */
 	banMember(i, session) {
-		// Stop countdown, update UI
+		// Stop countdown
 		clearInterval(i)
 		alert('Uh oh! Remaining time is over!')
 
-		// Return the bike
+		// Return and remove the bike 
 		this.returnBike(session.bike)
-
-		// Detach bike from member
 		delete session.bike
 		this.updateMemberSession(session)
 
-		// Update member session with `banned` key and "redirect" to login screen
-		if (!isPrivilegedAccount(session.mail)) {
-			session.isBanned = true
-			this.updateMemberSession(session)
-			delSession('session')
-			reload()
+		// Ban member and abort everything
+		session.isBanned = true
+		this.updateMemberSession(session)
+		delSession('session')
+		reload()
 
-		}
 	}
 
 	/**
@@ -218,7 +211,7 @@ export class Stations extends HTMLElement {
 	 * @param {object} session 
 	 */
 	updateMemberSession(session) {
-		//ze have to push in an array
+		//have to push in an array
 		let a = []
 		a.push(session)
 
