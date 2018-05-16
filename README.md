@@ -17,6 +17,9 @@ npm start
 npm run test
 
 # Run E2E test
+npm start
+
+# In a new shell
 npm run test-e2e
 ```
 

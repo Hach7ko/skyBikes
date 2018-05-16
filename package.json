@@ -1,16 +1,6 @@
 {
   "name": "skyBikes",
-  "jest": {
-    "testResultsProcessor": "./node_modules/jest-html-reporter",
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 90,
-        "lines": 90,
-        "statements": 90
-      }
-    }
-  },
+  "jest": {},
   "version": "1.0.0",
   "description": "Technical Test in vanilla JS",
   "main": "index.js",

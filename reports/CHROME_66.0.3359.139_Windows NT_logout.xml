@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="1">
 
   <testsuite name="logout"
-    errors="0" failures="0" hostname="" id="" package="logout" skipped="0"
-    tests="1" time="4.427" timestamp="Wed, 16 May 2018 02:21:51 GMT">
+    errors="0" failures="1" hostname="" id="" package="logout" skipped="0"
+    tests="1" time="7.639" timestamp="Wed, 16 May 2018 15:12:40 GMT">
   
-    <testcase name="Logout" classname="logout" time="4.427" assertions="4">
-
-    
-
-    
-
-    
+    <testcase name="Logout" classname="logout" time="7.639" assertions="1">  <failure message="Timed out while waiting for element &lt;body&gt; to be present for 1000 milliseconds.">    at Object.Logout (C:\Users\skhemri\Documents\technical-test\skyBikes\tests\e2e\logout.js:5:4)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)</failure>
 
     
     </testcase>

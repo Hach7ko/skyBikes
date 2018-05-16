@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="3">
 
   <testsuite name="login"
-    errors="0" failures="0" hostname="" id="" package="login" skipped="0"
-    tests="3" time="11.97" timestamp="Wed, 16 May 2018 02:21:39 GMT">
+    errors="0" failures="1" hostname="" id="" package="login" skipped="2"
+    tests="3" time="6.967" timestamp="Wed, 16 May 2018 15:12:33 GMT">
   
-    <testcase name="Test title SkyBikes" classname="login" time="4.196" assertions="2">
+    <testcase name="Test title SkyBikes" classname="login" time="6.967" assertions="2">
 
-    
-
-    
-    </testcase>
-  
-    <testcase name="Login user for sysadmin" classname="login" time="3.848" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Login user for citizen worker" classname="login" time="3.926" assertions="2">
-
-    
+      <failure message="The &lt;title&gt; is correct">    at Object.Test title SkyBikes (C:\Users\skhemri\Documents\technical-test\skyBikes\tests\e2e\login.js:6:11)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)</failure>
 
     
     </testcase>
@@ -31,6 +18,18 @@
 
   
 
+  
+    
+    <testcase
+      name="Login user for sysadmin" classname="login">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Login user for citizen worker" classname="login">
+      <skipped />
+    </testcase>
+    
   
   </testsuite>
 </testsuites>

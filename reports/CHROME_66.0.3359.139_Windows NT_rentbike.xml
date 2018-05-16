@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="1">
 
   <testsuite name="rentbike"
-    errors="0" failures="0" hostname="" id="" package="rentbike" skipped="0"
-    tests="1" time="4.104" timestamp="Wed, 16 May 2018 02:21:55 GMT">
+    errors="0" failures="1" hostname="" id="" package="rentbike" skipped="0"
+    tests="1" time="11.24" timestamp="Wed, 16 May 2018 15:12:47 GMT">
   
-    <testcase name="Rent a bike" classname="rentbike" time="4.104" assertions="3">
+    <testcase name="Rent a bike" classname="rentbike" time="11.24" assertions="2">
 
-    
-
-    
+      <failure message="Timed out while waiting for element &lt;input[name=lmail]&gt; to be present for 5000 milliseconds.">    at Object.Rent a bike (C:\Users\skhemri\Documents\technical-test\skyBikes\tests\e2e\rentbike.js:6:4)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)</failure>
 
     
     </testcase>
